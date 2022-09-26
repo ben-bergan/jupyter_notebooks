@@ -1,8 +1,12 @@
 from sre_constants import ANY_ALL
 import pandas as pd
 import streamlit as st
+from pathlib import Path
 
-df = pd.read_csv('..//Output//strava_run_data.csv')
+strava_run_data = Path(__file__).parents[0] / 'strava_run_data.csv'
+
+df = pd.read_csv(strava_run_data)
+
 df.drop(columns={'start_date','workout_type','distance','moving_time','elapsed_time','average_speed'},inplace=True)
 
 def race_count(run_category):
