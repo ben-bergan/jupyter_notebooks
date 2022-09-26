@@ -17,8 +17,7 @@ def race_count(run_category):
 
 df['race_counter'] = df.run_category.apply(race_count)      
 
-st.write("""# Strava Data  
-  yearly data analysis
+st.write("""# Yearly Strava Data Analysis
   Created by *Ben Bergan*""")
 
 year_select = df.year.unique().tolist()
