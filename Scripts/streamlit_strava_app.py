@@ -47,7 +47,7 @@ summary = summary.sort_values(by='year', ascending=False)
 summary.rename(columns={'distance_km':'Distance','total_elevation_gain':'Elevation Gain','race_counter':'Races'},inplace=True)
 year_summary = df[(df['year']==option) & (df['race_counter']==1)]
 year_summary = year_summary[['name','start_date_converted','distance_km','run_elapsed_time','average_cadence','average_heartrate']]
-year_summary.rename(columns={'name':'Race Name','start_date_converted':'Race Date','distance_km':'Distance','run_elapsed_time':'Race Time','average_heartrate':'Average Heartrate'},inplace=True)
+year_summary.rename(columns={'name':'Race Name','start_date_converted':'Race Date','distance_km':'Distance','run_elapsed_time':'Race Time','average_cadence':'Average Cadence','average_heartrate':'Average Heartrate'},inplace=True)
 
 col1, col2 = st.columns(2)
 col1.metric('Yearly Distance - Compared to Prior Year', distance_year, round(float(distance_year - distance_prior_year),2))
