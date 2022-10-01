@@ -56,7 +56,7 @@ col2.metric('Yearly Elevation Gain - Compared to Prior Year', elevation_year, ro
 st.caption ('This chart displays the km''s ran per month in the selected year')
 st.bar_chart(distance, x='month', y='distance_km')
 st.caption ('This chart displays total elevation gain per month in the selected year')
-st.line_chart(elevation, x='month',y='total_elevation_gain')
+st.bar_chart(elevation, x='month',y='total_elevation_gain')
 st.caption ('The table below lists all races in the selected year')
 st.table(year_summary)
 st.caption ('The table below compares the year on year performance')
