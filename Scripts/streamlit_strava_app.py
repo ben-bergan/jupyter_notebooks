@@ -8,7 +8,7 @@ strava_run_data = Path(__file__).parents[0] / 'strava_run_data.csv'
 
 df = pd.read_csv(strava_run_data)
 
-df.drop(columns={'achievement_count','comment_count','kudos_count','week'},inplace=True)
+df.drop(columns={'achievement_count','comment_count','kudos_count'},inplace=True)
 
 def race_count(run_category):
     if run_category == 'Race':
@@ -30,13 +30,12 @@ delta = option-1
 analysis = df[df['year']==option]
 analysis_prior = df[df['year']==delta]
 
-distance = analysis.groupby('month').agg({'distance_km':'sum'}).reset_index()
+distance = analysis.groupby('start_date_month').agg({'distance_km':'sum'}).reset_index()
 distance_year = analysis.groupby('year').agg({'distance_km':'sum'}).reset_index(drop=True)
 distance_year = np.array(distance_year)[0]
 distance_prior_year = analysis_prior.groupby('year').agg({'distance_km':'sum'}).reset_index(drop=True)
 distance_prior_year = np.array(distance_prior_year)[0]
-
-elevation = analysis.groupby('month').agg({'total_elevation_gain':'sum'}).reset_index()
+elevation = analysis.groupby('start_date_month').agg({'total_elevation_gain':'sum'}).reset_index()
 elevation_year = analysis.groupby('year').agg({'total_elevation_gain':'sum'}).reset_index(drop=True)
 elevation_year = np.array(elevation_year)[0]
 elevation_prior_year = analysis_prior.groupby('year').agg({'total_elevation_gain':'sum'}).reset_index(drop=True)
@@ -54,9 +53,9 @@ col1.metric('Yearly Distance - Compared to Prior Year', distance_year, round(flo
 col2.metric('Yearly Elevation Gain - Compared to Prior Year', elevation_year, round(float(elevation_year - elevation_prior_year),2))
 
 st.caption ('This chart displays the km''s ran per month in the selected year')
-st.bar_chart(distance, x='month', y='distance_km')
+st.bar_chart(distance, x='start_date_month', y='distance_km')
 st.caption ('This chart displays total elevation gain per month in the selected year')
-st.bar_chart(elevation, x='month',y='total_elevation_gain')
+st.bar_chart(elevation, x='start_date_month',y='total_elevation_gain')
 st.caption ('The table below lists all races in the selected year')
 st.table(year_summary)
 st.caption ('The table below compares the year on year performance')
